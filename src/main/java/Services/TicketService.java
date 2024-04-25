@@ -15,7 +15,7 @@ public class TicketService {
     }
 
     public void insert(Ticket t) {
-        String requete = "INSERT INTO ticket (event_id, user_id, prix, type_ticket) VALUES (?, ?, ?, ?)";
+        String requete = "INSERT INTO reservation (event_id, user_id, prix, type_ticket) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setInt(1, t.getEvent_id());
@@ -30,7 +30,7 @@ public class TicketService {
     }
 
     public void update(Ticket t) {
-        String requete = "UPDATE ticket SET event_id=?, user_id=?, prix=?, type_ticket=? WHERE id=?";
+        String requete = "UPDATE reservation SET event_id=?, user_id=?, prix=?, type_ticket=? WHERE id=?";
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setInt(1, t.getEvent_id());
@@ -46,7 +46,7 @@ public class TicketService {
     }
 
     public void delete(int id) {
-        String requete = "DELETE FROM ticket WHERE id = ?";
+        String requete = "DELETE FROM reservation WHERE id = ?";
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
             pst.setInt(1, id);
@@ -58,7 +58,7 @@ public class TicketService {
     }
 
     public Ticket readById(int id) {
-        String requete = "SELECT * FROM ticket WHERE id = ?";
+        String requete = "SELECT * FROM reservation WHERE id = ?";
         Ticket t = null;
         try {
             PreparedStatement pst = conn.prepareStatement(requete);
@@ -80,7 +80,7 @@ public class TicketService {
     }
 
     public ArrayList<Ticket> readAll() {
-        String requete = "SELECT * FROM ticket";
+        String requete = "SELECT * FROM reservation";
         ArrayList<Ticket> list = new ArrayList<>();
         try {
             Statement st = conn.createStatement();
@@ -102,7 +102,7 @@ public class TicketService {
     }
 
     public ArrayList<Ticket> getAllByEventId(int eventId) {
-        String requete = "SELECT * FROM ticket WHERE event_id = ?";
+        String requete = "SELECT * FROM reservation WHERE event_id = ?";
         ArrayList<Ticket> tickets = new ArrayList<>();
         try {
             PreparedStatement pst = conn.prepareStatement(requete);

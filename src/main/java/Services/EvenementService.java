@@ -54,7 +54,7 @@ public class EvenementService implements IService<Evenement> {
 
     @Override
     public void delete(int id) {
-        String requete1="DELETE FROM ticket WHERE event_id = ?";
+        String requete1="DELETE FROM reservation WHERE event_id = ?";
 
         try {
             PreparedStatement pst1 = conn.prepareStatement(requete1);
@@ -77,6 +77,7 @@ public class EvenementService implements IService<Evenement> {
             Logger.getLogger(EvenementService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public Evenement readById(int id) {
         String requete = "SELECT * FROM event WHERE id = ?";
