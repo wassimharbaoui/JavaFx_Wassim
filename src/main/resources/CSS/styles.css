@@ -1,0 +1,174 @@
+/* Importation des polices */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+/* Style général de l'AnchorPane */
+.anchor-pane {
+    -fx-background-image: url("file:///C:/Users/wessh/Desktop/Evenement/src/main/resources/images/background-pattern.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: repeat;
+    -fx-background-position: center;
+}
+
+/* Style de la carte d'événement */
+.card-view {
+    -fx-background-color: linear-gradient(to bottom right, #f4f4f4, #f9f9f9);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+    -fx-padding: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 2px;
+    -fx-transition: all 0.5s ease-in-out;
+    -fx-cursor: hand;
+    -fx-animation: card-animation 10s infinite linear;
+    -fx-pref-width: 360px;
+    -fx-pref-height: 200px;
+}
+
+@keyframes card-animation {
+    0% {
+        -fx-rotate: 0deg;
+    }
+    50% {
+        -fx-rotate: 5deg;
+    }
+    100% {
+        -fx-rotate: 0deg;
+    }
+}
+
+.card-view:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 15, 0, 0, 0);
+    -fx-translate-y: -10px;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-background-color: linear-gradient(to bottom right, #f0f0f0, #f7f7f7);
+}
+
+/* Style du titre de l'événement */
+.card-view .label.title {
+    -fx-font-family: "Montserrat", sans-serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding-bottom: 10px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 0);
+    -fx-transition: all 0.5s ease-in-out;
+}
+
+.card-view:hover .label.title {
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* Style des informations de l'événement */
+.card-view .label:not(.title) {
+    -fx-font-family: "Lato", sans-serif;
+    -fx-font-size: 16px;
+    -fx-text-fill: #555555;
+    -fx-padding-bottom: 5px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.5), 3, 0, 0, 0);
+    -fx-transition: all 0.5s ease-in-out;
+}
+
+.card-view:hover .label:not(.title) {
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);
+}
+
+/* Style de la ScrollPane */
+.card-view-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-vbar-policy: never;
+    -fx-hbar-policy: never;
+}
+
+/* Style du conteneur de la carte d'événement */
+.card-view-container {
+    -fx-background-color: transparent;
+    -fx-padding: 20px;
+    -fx-spacing: 20px;
+    -fx-animation: container-animation 20s infinite linear;
+    -fx-flex-direction: row;
+    -fx-justify-content: center;
+}
+
+@keyframes container-animation {
+    0% {
+        -fx-translate-x: 0;
+    }
+    100% {
+        -fx-translate-x: -200px;
+    }
+}
+
+/* Style du détail de l'événement */
+.detail-pane {
+    -fx-background-color: linear-gradient(to bottom right, rgba(240, 245, 245, 0.8), rgba(217, 230, 230, 0.8));
+}
+
+/* Style des labels dans le GridPane */
+.detail-pane .label {
+    -fx-font-family: "Montserrat", sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Style du ButtonBar */
+.button-bar {
+    -fx-background-color: transparent;
+}
+
+/* Style des boutons */
+.button {
+    -fx-background-color: linear-gradient(to bottom right, #5bc0de, #9b59b6);
+    -fx-text-fill: white;
+    -fx-font-family: "Lato", sans-serif;
+    -fx-font-size: 16px;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+    -fx-transition: all 0.5s ease-in-out;
+    -fx-cursor: hand;
+    -fx-animation: button-animation 5s infinite linear;
+}
+
+@keyframes button-animation {
+    0% {
+        -fx-scale-x: 1;
+        -fx-scale-y: 1;
+    }
+    50% {
+        -fx-scale-x: 1.1;
+        -fx-scale-y: 1.1;
+    }
+    100% {
+        -fx-scale-x: 1;
+        -fx-scale-y: 1;
+    }
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom right, #3498db, #8e44ad);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+/* Style du bouton "Réserver un événement" */
+.add-button {
+    -fx-background-color: linear-gradient(to bottom right, #3498db, #8e44ad);
+}
+
+.add-button:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+/* Style du bouton "Refresh" */
+.refresh-button {
+    -fx-background-color: linear-gradient(to bottom right, #5bc0de, #9b59b6);
+}
+
+.refresh-button:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}

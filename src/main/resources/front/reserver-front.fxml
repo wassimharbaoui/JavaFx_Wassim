@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FrontAddTicketController">
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="296.0" prefWidth="239.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="View.FrontAddTicketController">
     <children>
-        <ComboBox fx:id="eventIdComboBox" promptText="Select Event ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="20.0" AnchorPane.rightAnchor="10.0"/>
-        <ComboBox fx:id="userIdComboBox" promptText="Select User ID" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="70.0" AnchorPane.rightAnchor="10.0"/>
-        <ComboBox fx:id="typeComboBox" promptText="Select Ticket Type" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0" AnchorPane.rightAnchor="10.0">
+        <ComboBox fx:id="eventIdComboBox" promptText="Select Event ID" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />
+        <ComboBox fx:id="userIdComboBox" promptText="Select User ID" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
+        <ComboBox fx:id="typeComboBox" promptText="Select Ticket Type" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="NORMAL"/>
-                    <String fx:value="VIP"/>
-                    <String fx:value="GOLD"/>
-                    <String fx:value="PREMIUM"/>
+                    <String fx:value="NORMAL" />
+                    <String fx:value="VIP" />
+                    <String fx:value="GOLD" />
+                    <String fx:value="PREMIUM" />
                 </FXCollections>
             </items>
         </ComboBox>
-        <TextField fx:id="priceField" promptText="Enter price" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="170.0" AnchorPane.rightAnchor="10.0"/>
-        <Button text="Add Ticket" onAction="#handleAddTicket" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="220.0" AnchorPane.rightAnchor="10.0"/>
+        <TextField fx:id="priceField" promptText="Enter price" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="170.0" />
+        <Button onAction="#handleAddTicket" text="Add Ticket" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="220.0" />
     </children>
 </AnchorPane>

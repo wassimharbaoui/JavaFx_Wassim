@@ -2,18 +2,16 @@ package View;
 
 import Entities.Evenement;
 import Services.EvenementService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-
 public class AddEvenementController {
-    @FXML
-    private TextField descriptionField;
-
     @FXML
     private TextField titreField;
     @FXML
@@ -21,14 +19,28 @@ public class AddEvenementController {
     @FXML
     private DatePicker dateFinPicker;
     @FXML
-    private TextField themeField;
+    private ComboBox<String> themeComboBox;
     @FXML
-    private TextField localisationField;
+    private ComboBox<String> localisationComboBox;
+    @FXML
+    private TextField descriptionField;
 
     private IndexEvenementController indexEvenementController;
 
     public void setIndexEvenementController(IndexEvenementController controller) {
         this.indexEvenementController = controller;
+    }
+
+    @FXML
+    private void initialize() {
+        ObservableList<String> themes = FXCollections.observableArrayList("Voiture", "Motos","Bateaux");
+        themeComboBox.setItems(themes);
+
+        ObservableList<String> localisation = FXCollections.observableArrayList(
+                "Tunis", "Ariana", "Ben Arous", "Manouba", "Nabeul", "Zaghouan", "Bizerte", "Beja", "Jendouba", "Kef", "Siliana", "Kairouan",
+                "Kasserine", "Sidi Bouzid", "Sousse", "Monastir", "Mahdia", "Sfax", "Gafsa", "Tozeur", "Kebili", "Medenine", "Tataouine", "Gabes"
+        );
+        localisationComboBox.setItems(localisation);
     }
 
     private boolean isInputValid() {
@@ -48,12 +60,12 @@ public class AddEvenementController {
             errorMessage += "La date de fin ne peut pas être avant la date de début !\n";
         }
 
-        if (themeField.getText() == null || themeField.getText().isEmpty()) {
-            errorMessage += "Le champ thème est vide !\n";
+        if (themeComboBox.getValue() == null) {
+            errorMessage += "Aucun thème sélectionné !\n";
         }
 
-        if (localisationField.getText() == null || localisationField.getText().isEmpty()) {
-            errorMessage += "Le champ localisation est vide !\n";
+        if (localisationComboBox.getValue() == null) {
+            errorMessage += "Aucune localisation sélectionnée !\n";
         }
 
         if (!errorMessage.isEmpty()) {
@@ -70,9 +82,9 @@ public class AddEvenementController {
             evenement.setTitre(titreField.getText());
             evenement.setDate_debut(java.sql.Date.valueOf(dateDebutPicker.getValue()));
             evenement.setDate_fin(java.sql.Date.valueOf(dateFinPicker.getValue()));
-            evenement.setTheme(themeField.getText());
-            evenement.setLocalisation(localisationField.getText());
-            evenement.setDescription(descriptionField.getText());  // Assurez-vous de récupérer et de définir la description
+            evenement.setTheme(themeComboBox.getValue());
+            evenement.setLocalisation(localisationComboBox.getValue());
+            evenement.setDescription(descriptionField.getText());
 
             EvenementService service = new EvenementService();
             service.insert(evenement);

@@ -3,53 +3,43 @@ package View;
 import Entities.Evenement;
 import Services.EvenementService;
 import Services.IService;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class FrontIndexEvenementController {
 
-    public Label labelDateFin;
-    public Label labelDescription;
     @FXML
-    private TableView<Evenement> evenementTable;
-
+    private VBox cardViewContainer;
     @FXML
-    private TableColumn<Evenement, String> titreColumn;
-
-    @FXML
-    private TableColumn<Evenement, String> dateDebutColumn;
-
-    @FXML
-    private TableColumn<Evenement, String> themeColumn;
-
-    @FXML
-    private TableColumn<Evenement, String> localisationColumn;
-
+    private ScrollPane cardViewScrollPane;
     @FXML
     private Label labelTitre;
-
     @FXML
     private Label labelDateDebut;
-
+    @FXML
+    private Label labelDateFin;
     @FXML
     private Label labelTheme;
-
     @FXML
     private Label labelLocalisation;
+    @FXML
+    private Label labelDescription;
 
     private ObservableList<Evenement> evenements = FXCollections.observableArrayList();
     private IService<Evenement> evenementService = new EvenementService();
@@ -58,45 +48,54 @@ public class FrontIndexEvenementController {
 
     @FXML
     private void initialize() {
-        titreColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitre()));
-        dateDebutColumn.setCellValueFactory(cellData -> new SimpleStringProperty(dateFormat.format(cellData.getValue().getDate_debut())));
-        themeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTheme()));
-        localisationColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLocalisation()));
+        refreshCardView();
+    }
 
-        evenementTable.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showEvenementDetails(newValue));
+    public void refreshCardView() {
+        cardViewContainer.getChildren().clear();
+        evenements.clear();
+        evenements.addAll(evenementService.readAll());
 
-        refreshTableView();
+        for (Evenement evenement : evenements) {
+            AnchorPane card = createCardView(evenement);
+            cardViewContainer.getChildren().add(card);
+        }
+    }
+
+    private AnchorPane createCardView(Evenement evenement) {
+        AnchorPane card = new AnchorPane();
+        card.getStyleClass().add("card-view");
+
+        Label titreLabel = new Label(evenement.getTitre());
+        titreLabel.setFont(new Font("System Bold", 16));
+
+        Label dateDebutLabel = new Label("Date de début: " + dateFormat.format(evenement.getDate_debut()));
+        Label dateFinLabel = new Label("Date de fin: " + dateFormat.format(evenement.getDate_fin()));
+        Label themeLabel = new Label("Thème: " + evenement.getTheme());
+        Label localisationLabel = new Label("Localisation: " + evenement.getLocalisation());
+        Label descriptionLabel = new Label("Description: " + evenement.getDescription());
+
+        VBox content = new VBox(titreLabel, dateDebutLabel, dateFinLabel, themeLabel, localisationLabel, descriptionLabel);
+        content.setSpacing(5);
+        content.setPadding(new Insets(10));
+
+        card.getChildren().add(content);
+        card.setEffect(new javafx.scene.effect.DropShadow(10, Color.GRAY));
+
+        card.setOnMouseClicked(event -> {
+            showEvenementDetails(evenement);
+        });
+
+        return card;
     }
 
     private void showEvenementDetails(Evenement evenement) {
-        if (evenement != null) {
-            labelTitre.setText(evenement.getTitre());
-            labelDateDebut.setText(dateFormat.format(evenement.getDate_debut()));
-            labelDateFin.setText(dateFormat.format(evenement.getDate_fin()));
-            labelTheme.setText(evenement.getTheme());
-            labelLocalisation.setText(evenement.getLocalisation());
-            labelDescription.setText(evenement.getDescription());
-        } else {
-            labelTitre.setText("");
-            labelDateDebut.setText("");
-            labelDateFin.setText("");
-            labelTheme.setText("");
-            labelLocalisation.setText("");
-            labelDescription.setText("");
-
-        }}
-
-    @FXML
-    public void refreshTableView() {
-        try {
-            evenements.clear();
-            evenements.addAll(evenementService.readAll());
-            evenementTable.setItems(evenements);
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlertDialog(Alert.AlertType.ERROR, "Database Error", "Failed to fetch Evenements", e.getMessage());
-        }
+        labelTitre.setText(evenement.getTitre());
+        labelDateDebut.setText(dateFormat.format(evenement.getDate_debut()));
+        labelDateFin.setText(dateFormat.format(evenement.getDate_fin()));
+        labelTheme.setText(evenement.getTheme());
+        labelLocalisation.setText(evenement.getLocalisation());
+        labelDescription.setText(evenement.getDescription());
     }
 
     private void showAlertDialog(Alert.AlertType type, String title, String header, String content) {
@@ -107,14 +106,6 @@ public class FrontIndexEvenementController {
         alert.showAndWait();
     }
 
-
-
-
-
-
-
-
-
     public void launchAddTicketForm() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/front/reserver-front.fxml"));
@@ -122,10 +113,9 @@ public class FrontIndexEvenementController {
             Stage stage = new Stage();
             stage.setTitle("Add New Ticket");
             stage.setScene(new Scene(root));
-            stage.showAndWait();  // Cette méthode bloque jusqu'à ce que la fenêtre soit fermée
+            stage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
