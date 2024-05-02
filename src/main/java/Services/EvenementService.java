@@ -64,6 +64,15 @@ public class EvenementService implements IService<Evenement> {
         } catch (SQLException ex) {
             Logger.getLogger(EvenementService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        String deleteAvisQuery = "DELETE FROM avis WHERE event_id = ?";
+        try {
+            PreparedStatement deleteAvisStatement = conn.prepareStatement(deleteAvisQuery);
+            deleteAvisStatement.setInt(1, id);
+            int deletedRows = deleteAvisStatement.executeUpdate();
+            System.out.println("Nombre d'avis supprimés : " + deletedRows);
+        } catch (SQLException ex) {
+            Logger.getLogger(EvenementService.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
 
