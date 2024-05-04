@@ -11,38 +11,38 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="608.0" prefWidth="764.0" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FrontIndexEvenementController">
+<AnchorPane prefHeight="608.0" prefWidth="758.0" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FrontIndexEvenementController">
     <children>
-        <SplitPane dividerPositions="0.07783641160949867, 0.1850263852242744" orientation="VERTICAL" prefHeight="608.0" prefWidth="764.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.07861425716189206, 0.18687541638907393" orientation="VERTICAL" prefHeight="602.0" prefWidth="758.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <HBox alignment="CENTER" prefHeight="148.0" prefWidth="763.0">
+                <HBox alignment="CENTER" prefHeight="38.0" prefWidth="758.0">
                     <opaqueInsets>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </opaqueInsets>
                     <children>
                         <BorderPane style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;">
                             <center>
-                                <Label fx:id="meilleurevenement" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #FF0000; -fx-font-family: 'Arial', sans-serif;" text="Label" />
+                                <Label fx:id="meilleurevenement" alignment="CENTER" prefHeight="131.0" prefWidth="834.0" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #FF0000; -fx-font-family: 'Arial', sans-serif;" text="Label" />
                             </center>
                         </BorderPane>
                     </children>
                 </HBox>
 
-                <HBox alignment="CENTER" prefHeight="48.0" prefWidth="762.0">
+                <HBox alignment="CENTER" prefHeight="59.0" prefWidth="710.0">
                     <Label style="-fx-text-fill: #4CAF50; -fx-font-size: 16px; -fx-font-weight: bold;" text="Rechercher par nom :" />
                     <TextField fx:id="searchField" onKeyReleased="#searchByName" prefHeight="26.0" prefWidth="156.0" />
-                    <Button alignment="CENTER" onAction="#searchByName" prefHeight="46.0" prefWidth="151.0" text="Rechercher" textAlignment="CENTER">
+                    <Button alignment="CENTER" onAction="#searchByName" prefHeight="46.0" prefWidth="194.0" text="Rechercher" textAlignment="CENTER">
                   <opaqueInsets>
                      <Insets />
                   </opaqueInsets></Button>
-               <Button mnemonicParsing="false" onAction="#launchAddTicketForm" styleClass="button" text="Réserver un événement" />
+               <Button mnemonicParsing="false" onAction="#launchAddTicketForm" prefHeight="46.0" prefWidth="222.0" styleClass="button" text="Réserver un événement" />
                 </HBox>
 
 
 
-                <AnchorPane prefHeight="398.0" prefWidth="763.0" styleClass="card-view-container" stylesheets="@../CSS/styles.css">
+                <AnchorPane prefHeight="491.0" prefWidth="763.0" styleClass="card-view-container" stylesheets="@../CSS/styles.css">
                     <children>
-                        <ScrollPane fx:id="cardViewScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutY="-3.0" prefHeight="551.0" prefWidth="763.0" styleClass="card-view-scroll-pane" AnchorPane.bottomAnchor="-363.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-3.0">
+                        <ScrollPane fx:id="cardViewScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutX="4.0" layoutY="1.0" prefHeight="486.0" prefWidth="748.0" styleClass="card-view-scroll-pane" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="1.0">
                             <content>
                                 <VBox fx:id="cardViewContainer" alignment="TOP_CENTER" prefWidth="744.0" spacing="10">
                                     <style>

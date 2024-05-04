@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
         //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/index-evenement.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/front/index-evenement-front.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("Welcome To AlphaTroc Events!");
         stage.setScene(scene);
         stage.show();
     }

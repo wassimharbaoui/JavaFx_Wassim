@@ -119,22 +119,7 @@ public class FrontIndexEvenementController {
 
 
     private void showEvenementDetails(Evenement evenement) {
-        try {
-            List<Evenement> evenements = List.of(evenement); // Convertir l'événement en une liste pour la génération du QR code
-            ImageView qrView = new ImageView(QRCodeGenerator.generateQRCodeImage(evenements));
-            qrView.setFitHeight(200);
-            qrView.setFitWidth(200);
 
-            // Afficher une boîte de dialogue avec le QR code
-            Alert qrDialog = new Alert(Alert.AlertType.INFORMATION);
-            qrDialog.setTitle("QR Code pour " + evenement.getTitre());
-            qrDialog.setHeaderText(null);
-            qrDialog.setGraphic(qrView);
-            qrDialog.showAndWait();
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlertDialog(Alert.AlertType.ERROR, "Erreur", "Erreur lors de la génération du QR code", e.getMessage());
-        }
     }
 
     private void showAlertDialog(Alert.AlertType type, String title, String header, String content) {
