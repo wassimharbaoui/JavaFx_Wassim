@@ -2,21 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.BorderPane?>
 <AnchorPane prefHeight="608.0" prefWidth="764.0" stylesheets="@../CSS/styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FrontIndexEvenementController">
     <children>
-        <SplitPane dividerPositions="0.5, 0.5" orientation="VERTICAL" prefHeight="608.0" prefWidth="764.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.07783641160949867, 0.1850263852242744" orientation="VERTICAL" prefHeight="608.0" prefWidth="764.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <HBox alignment="CENTER" prefHeight="148.0" prefWidth="763.0">
                     <opaqueInsets>
@@ -25,17 +22,27 @@
                     <children>
                         <BorderPane style="-fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-padding: 10px;">
                             <center>
-                                <Label fx:id="meilleurevenement" text="Label" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333;" />
+                                <Label fx:id="meilleurevenement" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #FF0000; -fx-font-family: 'Arial', sans-serif;" text="Label" />
                             </center>
                         </BorderPane>
                     </children>
                 </HBox>
 
+                <HBox alignment="CENTER" prefHeight="48.0" prefWidth="762.0">
+                    <Label style="-fx-text-fill: #4CAF50; -fx-font-size: 16px; -fx-font-weight: bold;" text="Rechercher par nom :" />
+                    <TextField fx:id="searchField" onKeyReleased="#searchByName" prefHeight="26.0" prefWidth="156.0" />
+                    <Button alignment="CENTER" onAction="#searchByName" prefHeight="46.0" prefWidth="151.0" text="Rechercher" textAlignment="CENTER">
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets></Button>
+               <Button mnemonicParsing="false" onAction="#launchAddTicketForm" styleClass="button" text="Réserver un événement" />
+                </HBox>
 
 
-                <AnchorPane styleClass="card-view-container" stylesheets="@../CSS/styles.css">
+
+                <AnchorPane prefHeight="398.0" prefWidth="763.0" styleClass="card-view-container" stylesheets="@../CSS/styles.css">
                     <children>
-                        <ScrollPane fx:id="cardViewScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefHeight="294.0" prefWidth="764.0" styleClass="card-view-scroll-pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fx:id="cardViewScrollPane" fitToWidth="true" hbarPolicy="NEVER" layoutY="-3.0" prefHeight="551.0" prefWidth="763.0" styleClass="card-view-scroll-pane" AnchorPane.bottomAnchor="-363.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-3.0">
                             <content>
                                 <VBox fx:id="cardViewContainer" alignment="TOP_CENTER" prefWidth="744.0" spacing="10">
                                     <style>
@@ -44,47 +51,6 @@
                                 </VBox>
                             </content>
                         </ScrollPane>
-                    </children>
-                </AnchorPane>
-                <AnchorPane styleClass="detail-pane">
-                    <children>
-                        <GridPane hgap="10" vgap="10" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                            <style>
-                                -fx-background-color: #000000; /* Couleur de fond */
-                            </style>
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints />
-                                <RowConstraints />
-                                <RowConstraints />
-                                <RowConstraints />
-                                <RowConstraints />
-                                <RowConstraints />
-                            </rowConstraints>
-                            <children>
-                                <Label text="Titre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                <Label fx:id="labelTitre" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                <Label text="Date de Début:" GridPane.rowIndex="1" />
-                                <Label fx:id="labelDateDebut" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <Label text="Date de Fin:" GridPane.rowIndex="2" />
-                                <Label fx:id="labelDateFin" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Label text="Thème:" GridPane.rowIndex="3" />
-                                <Label fx:id="labelTheme" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                <Label text="Localisation:" GridPane.rowIndex="4" />
-                                <Label fx:id="labelLocalisation" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <Label text="Description:" GridPane.rowIndex="5" />
-                                <Label fx:id="labelDescription" text="" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                            </children>
-                        </GridPane>
-                        <ButtonBar AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                            <buttons>
-                                <Button minWidth="100.0" onAction="#refreshCardView" styleClass="button" text="Refresh" />
-                                <Button mnemonicParsing="false" onAction="#launchAddTicketForm" styleClass="button" text="Réserver un événement" />
-                            </buttons>
-                        </ButtonBar>
                     </children>
                 </AnchorPane>
             </items>

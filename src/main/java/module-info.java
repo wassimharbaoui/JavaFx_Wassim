@@ -12,4 +12,10 @@ module com.example.xperiencetunuser {
     exports App;
     exports View;
     opens View to javafx.fxml;
+
+    requires java.desktop;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
+    requires javafx.swing;
+
 }

@@ -37,6 +37,7 @@ public class FrontAddTicketController {
                 userService.readAll().stream()
                         .map(User::getId)
                         .collect(Collectors.toList())
+
         );
     }
 

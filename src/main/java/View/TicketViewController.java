@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 
 public class TicketViewController {
     @FXML
@@ -71,4 +72,5 @@ public class TicketViewController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

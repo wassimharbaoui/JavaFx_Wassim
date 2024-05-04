@@ -1,4 +1,6 @@
 package View;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import Entities.Avis;
 import Entities.Evenement;
@@ -116,23 +118,24 @@ public class FrontIndexEvenementController {
 
 
 
-
     private void showEvenementDetails(Evenement evenement) {
-        labelTitre.setText(evenement.getTitre());
-        labelDateDebut.setText(dateFormat.format(evenement.getDate_debut())); // Utilisation de java.sql.Date
-        labelDateFin.setText(dateFormat.format(evenement.getDate_fin()));
-        labelTheme.setText(evenement.getTheme());
-        labelLocalisation.setText(evenement.getLocalisation());
-        labelDescription.setText(evenement.getDescription());
+        try {
+            List<Evenement> evenements = List.of(evenement); // Convertir l'événement en une liste pour la génération du QR code
+            ImageView qrView = new ImageView(QRCodeGenerator.generateQRCodeImage(evenements));
+            qrView.setFitHeight(200);
+            qrView.setFitWidth(200);
 
-        // Convertir la date de début en LocalDate
-        LocalDate dateDebutLocal = evenement.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-        // Utiliser la date de début en tant que LocalDate
-        System.out.println("Date de début (LocalDate) : " + dateDebutLocal);
+            // Afficher une boîte de dialogue avec le QR code
+            Alert qrDialog = new Alert(Alert.AlertType.INFORMATION);
+            qrDialog.setTitle("QR Code pour " + evenement.getTitre());
+            qrDialog.setHeaderText(null);
+            qrDialog.setGraphic(qrView);
+            qrDialog.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlertDialog(Alert.AlertType.ERROR, "Erreur", "Erreur lors de la génération du QR code", e.getMessage());
+        }
     }
-
-
 
     private void showAlertDialog(Alert.AlertType type, String title, String header, String content) {
         Alert alert = new Alert(type);
@@ -310,6 +313,31 @@ public class FrontIndexEvenementController {
         }
 
         return totalNotes / avisList.size(); // Calculer la moyenne
+    }
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private void searchByName() {
+        String searchQuery = searchField.getText().trim().toLowerCase();
+
+        if (searchQuery.isEmpty()) {
+            refreshCardView(); // Si la recherche est vide, afficher tous les événements
+        } else {
+            // Filtrer les événements par nom
+            ObservableList<Evenement> filteredList = FXCollections.observableArrayList();
+            for (Evenement evenement : evenements) {
+                if (evenement.getTitre().toLowerCase().contains(searchQuery)) {
+                    filteredList.add(evenement);
+                }
+            }
+            // Afficher les événements filtrés
+            cardViewContainer.getChildren().clear();
+            for (Evenement evenement : filteredList) {
+                AnchorPane card = createCardView(evenement);
+                cardViewContainer.getChildren().add(card);
+            }
+        }
     }
 
 
